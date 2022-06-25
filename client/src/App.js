@@ -13,53 +13,57 @@ function App() {
 
     const [employeeList, setEmployeeList] = useState([]);
 
+    //Adding the new employee
     const addEmployee = () => {
         Axios.post("http://localhost:3001/create", {
-            name: name,
-            age: age,
-            country: country,
-            position: position,
-            wage: wage,
+            name: name, //Set name
+            age: age, //Set age
+            country: country, //Set country
+            position: position, //Set Position
+            wage: wage, //Set Wage
         }).then(() => {
-            setEmployeeList([
+            setEmployeeList([ //Print the information given by the user
                 ...employeeList,
                 {
-                    name: name,
-                    age: age,
-                    country: country,
-                    position: position,
-                    wage: wage,
+                    Name: name,
+                    Age: age,
+                    Country: country,
+                    Position: position,
+                    Wage: wage,
                 },
             ]);
         });
     };
 
+    //Get all the employees saved in the database
     const getEmployees = () => {
         Axios.get("http://localhost:3001/employees").then((response) => {
             setEmployeeList(response.data);
         });
     };
 
+    //Update an employee wage by his unique id
     const updateEmployeeWage = (id) => {
         Axios.put("http://localhost:3001/update", { wage: newWage, id: id }).then(
             (response) => {
                 setEmployeeList(
                     employeeList.map((val) => {
-                        return val.id == id ? {
-                                id: val.id,
+                        return val.id == id ? { //Check if the id is valid
+                                id: val.id, //if valid update employee information
                                 name: val.name,
                                 country: val.country,
                                 age: val.age,
                                 position: val.position,
                                 wage: newWage,
                             } :
-                            val;
+                            val; //else if not valid, return the employee without changing anything
                     })
                 );
             }
         );
     };
 
+    //Delete an employee from the database by its unique id
     const deleteEmployee = (id) => {
         Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
             setEmployeeList(
@@ -70,6 +74,7 @@ function App() {
         });
     };
 
+    //The user can either fill new employee information or click Show Employees to get all saved employees information
     return ( <
         div className = "App" >
         <
@@ -85,7 +90,7 @@ function App() {
                 setName(event.target.value);
             }
         }
-        />  <
+        /> <
         label > Age: < /label> <
         input type = "number"
         onChange = {
@@ -93,7 +98,7 @@ function App() {
                 setAge(event.target.value);
             }
         }
-        />  <
+        /> <
         label > Country: < /label> <
         input type = "text"
         onChange = {
@@ -101,7 +106,7 @@ function App() {
                 setCountry(event.target.value);
             }
         }
-        />  <
+        /> <
         label > Position: < /label> <
         input type = "text"
         onChange = {
@@ -109,7 +114,7 @@ function App() {
                 setPosition(event.target.value);
             }
         }
-        />  <
+        /> <
         label > Wage(year): < /label> <
         input type = "number"
         onChange = {
@@ -117,9 +122,9 @@ function App() {
                 setWage(event.target.value);
             }
         }
-        />  <
-        button onClick = { addEmployee } > Add Employee < /button>  <
-        /div>  <
+        /> <
+        button onClick = { addEmployee } > Add Employee < /button> <
+        /div> <
         div className = "employees" >
         <
         button onClick = { getEmployees } > Show Employees < /button>
@@ -131,12 +136,12 @@ function App() {
                     <
                     div >
                     <
-                    h3 > Name: { val.Name } < /h3>  <
-                    h3 > Age: { val.Age } < /h3>  <
-                    h3 > Country: { val.Country } < /h3>  <
+                    h3 > Name: { val.Name } < /h3> <
+                    h3 > Age: { val.Age } < /h3> <
+                    h3 > Country: { val.Country } < /h3> <
                     h3 > Position: { val.Position } < /h3> <
-                    h3 > Wage: { val.Wage } < /h3>  <
-                    /div>  <
+                    h3 > Wage: { val.Wage } < /h3>   <
+                    /div> <
                     div >
                     <
                     input type = "text"
@@ -146,7 +151,7 @@ function App() {
                             setNewWage(event.target.value);
                         }
                     }
-                    />  <
+                    /> <
                     button onClick = {
                         () => {
                             updateEmployeeWage(val.id);
@@ -162,13 +167,13 @@ function App() {
                         }
                     } >
                     Delete <
-                    /button>  <
-                    /div>  <
+                    /button> <
+                    /div> <
                     /div>
                 );
             })
         } <
-        /div>  <
+        /div> <
         /div>
     );
 }

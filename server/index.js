@@ -6,6 +6,7 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
+//Database connection
 const db = mysql.createConnection({
     user: "root",
     host: "localhost",
@@ -13,6 +14,7 @@ const db = mysql.createConnection({
     database: "employeedb",
 });
 
+//Create api where employee information are set when adding new employee
 app.post("/create", (req, res) => {
     const name = req.body.name;
     const age = req.body.age;
@@ -20,6 +22,7 @@ app.post("/create", (req, res) => {
     const position = req.body.position;
     const wage = req.body.wage;
 
+    //Adding the employee information to the database
     db.query(
         "INSERT INTO employee (name, age, country, position, wage) VALUES (?,?,?,?,?)", [name, age, country, position, wage],
         (err, result) => {
@@ -32,6 +35,7 @@ app.post("/create", (req, res) => {
     );
 });
 
+//Get all the employees from the database
 app.get("/employees", (req, res) => {
     db.query("SELECT * FROM employee", (err, result) => {
         if (err) {
@@ -42,9 +46,13 @@ app.get("/employees", (req, res) => {
     });
 });
 
+//Update api where we apdate employee wage by his unique id
 app.put("/update", (req, res) => {
+    //reading id and wage from user
     const id = req.body.id;
     const wage = req.body.wage;
+
+    //Updating wage in databse
     db.query(
         "UPDATE employee SET wage = ? WHERE id = ?", [wage, id],
         (err, result) => {
@@ -57,6 +65,7 @@ app.put("/update", (req, res) => {
     );
 });
 
+//Delete api where an employee is deleted by its unique id
 app.delete("/delete/:id", (req, res) => {
     const id = req.params.id;
     db.query("DELETE FROM employee WHERE id = ?", id, (err, result) => {
