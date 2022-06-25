@@ -4,7 +4,7 @@ function App() {
     return ( <
         div className = "App" >
         <
-        h1 > Employee Application < /h1>  <
+        h1 > Employee Application < /h1>   <
         /div>
     );
 }
