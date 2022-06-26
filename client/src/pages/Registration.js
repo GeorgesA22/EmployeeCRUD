@@ -13,15 +13,17 @@ export default function Registration() {
 
     Axios.defaults.withCredentials = true;
 
+    //Register api where user create new account with usernaem and password
     const register = () => {
         Axios.post("http://localhost:3001/register", {
-            username: usernameReg,
-            password: passwordReg,
+            username: usernameReg, //Set username
+            password: passwordReg, //Set password
         }).then((response) => {
             console.log(response);
         });
     };
 
+    //Login api where the given username and password given by the user are checked in the database
     const login = () => {
         Axios.post("http://localhost:3001/login", {
             username: username,
@@ -35,14 +37,16 @@ export default function Registration() {
         });
     };
 
+    /*/Get login api where we get the login status of a user
     useEffect(() => {
-        Axios.get("http://localhost:3001/login").then((response) => {
-            if (response.data.loggedIn == true) {
-                setLoginStatus(response.data.user[0].username);
-            }
-        });
-    }, []);
+      Axios.get("http://localhost:3001/login").then((response) => {
+        if (response.data.loggedIn == true) {
+          setLoginStatus(response.data.user[0].username);
+        }
+      });
+    }, []);*/
 
+    //The user can either fill information and register or login with previour registered information
     return ( <
         div className = "App" >
         <
