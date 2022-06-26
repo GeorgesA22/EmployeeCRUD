@@ -3,7 +3,7 @@ import Axios from "axios";
 import "../App.css";
 
 export default function Main() {
-    const [name, setName] = useState("");
+  const [name, setName] = useState("");
     const [age, setAge] = useState(0);
     const [country, setCountry] = useState("");
     const [position, setPosition] = useState("");
@@ -75,105 +75,92 @@ export default function Main() {
     };
 
     //The user can either fill new employee information or click Show Employees to get all saved employees information
-    return ( <
-        div className = "App" >
-        <
-        h1 > Employees Application < /h1>
+    return (
+      <div className = "App" >
+        <h1> Employees Application </h1>
 
-        <
-        div className = "information" >
-        <
-        label > Name: < /label> <
-        input type = "text"
-        onChange = {
-            (event) => {
-                setName(event.target.value);
-            }
-        }
-        /> <
-        label > Age: < /label> <
-        input type = "number"
-        onChange = {
-            (event) => {
-                setAge(event.target.value);
-            }
-        }
-        /> <
-        label > Country: < /label> <
-        input type = "text"
-        onChange = {
-            (event) => {
-                setCountry(event.target.value);
-            }
-        }
-        /> <
-        label > Position: < /label> <
-        input type = "text"
-        onChange = {
-            (event) => {
-                setPosition(event.target.value);
-            }
-        }
-        /> <
-        label > Wage(year): < /label> <
-        input type = "number"
-        onChange = {
-            (event) => {
-                setWage(event.target.value);
-            }
-        }
-        /> <
-        button onClick = { addEmployee } > Add Employee < /button> <
-        /div> <
-        div className = "employees" >
-        <
-        button onClick = { getEmployees } > Show Employees < /button>
+        <div className="information">
+        <label>Name:</label>
+        <input
+          type="text"
+          onChange={(event) => {
+            setName(event.target.value);
+          }}
+        />
+        <label>Age:</label>
+        <input
+          type="number"
+          onChange={(event) => {
+            setAge(event.target.value);
+          }}
+        />
+        <label>Country:</label>
+        <input
+          type="text"
+          onChange={(event) => {
+            setCountry(event.target.value);
+          }}
+        />
+        <label>Position:</label>
+        <input
+          type="text"
+          onChange={(event) => {
+            setPosition(event.target.value);
+          }}
+        />
+        <label>Wage (year):</label>
+        <input
+          type="number"
+          onChange={(event) => {
+            setWage(event.target.value);
+          }}
+        />
+        <button onClick={addEmployee}>Add Employee</button>
+      </div>
+      <div className="employees">
+        <button onClick={getEmployees}>Show Employees</button>
 
         {
             employeeList.map((val, key) => {
-                return ( <
-                    div className = "employee" >
-                    <
-                    div >
-                    <
-                    h3 > Name: { val.Name } < /h3> <
-                    h3 > Age: { val.Age } < /h3> <
-                    h3 > Country: { val.Country } < /h3> <
-                    h3 > Position: { val.Position } < /h3> <
-                    h3 > Wage: { val.Wage } < /h3>   <
-                    /div> <
-                    div >
-                    <
-                    input type = "text"
+                return (
+                  <div className = "employee">
+                    <div >
+                    <h3> Name: { val.Name } </h3>
+                    <h3> Age: { val.Age } </h3>
+                    <h3> Country: { val.Country } </h3>
+                    <h3> Position: { val.Position } </h3>
+                    <h3 > Wage: { val.Wage } </h3>  
+                    </div>
+                    <div>
+                    <input type = "text"
                     placeholder = "Wage..."
                     onChange = {
                         (event) => {
                             setNewWage(event.target.value);
                         }
                     }
-                    /> <
-                    button onClick = {
+                    />
+                    <button onClick = {
                         () => {
                             updateEmployeeWage(val.id);
                         }
                     } > { " " }
-                    Update <
-                    /button>
+                    Update 
+                    </button>
 
-                    <
-                    button onClick = {
+                    <button onClick = {
                         () => {
                             deleteEmployee(val.id);
                         }
                     } >
-                    Delete <
-                    /button> <
-                    /div> <
-                    /div>
+                    Delete
+                    </button>
+                    </div>
+                    </div>
                 );
             })
-        } <
-        /div> <
-        /div>
+        }
+        </div>
+        </div>
     );
 }

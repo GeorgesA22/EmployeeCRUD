@@ -49,35 +49,31 @@ export default function Registration() {
     }, []);
 
     //The user can either fill information and register or login with previour registered information
-    return ( <
-        div className = "App" >
-        <
-        div className = "registration" >
-        <
-        h1 > Registration < /h1> <
-        label > Username < /label> <
+    return ( 
+        <div className = "App" >
+        <div className = "registration" >
+        <h1> Registration </h1>
+        <label > Username </label> <
         input type = "text"
         onChange = {
             (e) => {
                 setUsernameReg(e.target.value);
             }
         }
-        /> <
-        label > Password < /label> <
+        />
+        <label> Password </label> <
         input type = "text"
         onChange = {
             (e) => {
                 setPasswordReg(e.target.value);
             }
         }
-        /> <
-        button onClick = { register } > Register < /button> <
-        /div>
+        />
+        <button onClick = { register } > Register </button>
+        </div>
 
-        <
-        div className = "login" >
-        <
-        h1 > Login < /h1> <
+        <div className = "login">
+        <h1> Login </h1> <
         input type = "text"
         placeholder = "Username..."
         onChange = {
@@ -93,12 +89,11 @@ export default function Registration() {
                 setPassword(e.target.value);
             }
         }
-        /> <
-        button onClick = { login } > Login < /button> <
-        /div>
+        />
+        <button onClick = { login } > Login </button>
+        </div>
 
-        <
-        h1 > { loginStatus } < /h1> <
-        /div>
+        <h1> { loginStatus } </h1>
+        </div>
     );
 }
