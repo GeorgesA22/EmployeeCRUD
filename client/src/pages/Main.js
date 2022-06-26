@@ -1,8 +1,8 @@
-import "./App.css";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import "../App.css";
 
-function App() {
+export default function Main() {
     const [name, setName] = useState("");
     const [age, setAge] = useState(0);
     const [country, setCountry] = useState("");
@@ -177,24 +177,3 @@ function App() {
         /div>
     );
 }
-
-export default App;
-
-/*
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import "./App.css";
-import Main from "./pages/Main";
-import Registration from "./pages/Registration";
-
-function App() {
-  return (
-    <Router>
-      <Route path="/registration" exact render={(props) => <Registration />} />
-      <Route path="/" exact render={(props) => <Main />} />
-    </Router>
-  );
-}
-
-export default App;
-*/
