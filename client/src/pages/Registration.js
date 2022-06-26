@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Registration() {
     const [usernameReg, setUsernameReg] = useState("");
@@ -19,32 +20,33 @@ export default function Registration() {
             username: usernameReg, //Set username
             password: passwordReg, //Set password
         }).then((response) => {
+            setLoginStatus(response.data.message);
             console.log(response);
         });
     };
-
+    const nav = useNavigate();
     //Login api where the given username and password given by the user are checked in the database
     const login = () => {
         Axios.post("http://localhost:3001/login", {
-            username: username,
-            password: password,
-        }).then((response) => {
+            username: username, //Read username
+            password: password, //Read password
+        }).then((response) => { //Check credentials
             if (response.data.message) {
                 setLoginStatus(response.data.message);
             } else {
                 setLoginStatus(response.data[0].username);
+                nav("/main");
             }
         });
     };
 
-    /*/Get login api where we get the login status of a user
     useEffect(() => {
-      Axios.get("http://localhost:3001/login").then((response) => {
-        if (response.data.loggedIn == true) {
-          setLoginStatus(response.data.user[0].username);
-        }
-      });
-    }, []);*/
+        Axios.get("http://localhost:3001/login").then((response) => {
+            if (response.data.loggedIn == true) {
+                setLoginStatus(response.data.user[0].username);
+            }
+        });
+    }, []);
 
     //The user can either fill information and register or login with previour registered information
     return ( <

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 import "../App.css";
 
@@ -50,11 +50,11 @@ export default function Main() {
                     employeeList.map((val) => {
                         return val.id == id ? { //Check if the id is valid
                                 id: val.id, //if valid update employee information
-                                name: val.name,
-                                country: val.country,
-                                age: val.age,
-                                position: val.position,
-                                wage: newWage,
+                                Name: val.Name,
+                                Country: val.Country,
+                                Age: val.Age,
+                                Position: val.Position,
+                                Wage: newWage,
                             } :
                             val; //else if not valid, return the employee without changing anything
                     })

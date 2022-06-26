@@ -10,13 +10,12 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-app.use(cors());
 app.use(express.json());
 
 app.use(
     cors({
         origin: ["http://localhost:3000"],
-        methods: ["GET", "POST"],
+        methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
     })
 );
@@ -59,6 +58,7 @@ app.post("/register", (req, res) => {
             }
         );
     });
+    res.send({ message: "Registered!" });
 });
 
 app.get("/login", (req, res) => {
@@ -88,7 +88,7 @@ app.post("/login", (req, res) => {
                         console.log(req.session.user);
                         res.send(result);
                     } else {
-                        res.send({ message: "Wrong username/password combination!" });
+                        res.send({ message: "Wrong password!" });
                     }
                 });
             } else {
